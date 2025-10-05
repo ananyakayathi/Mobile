@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileMart | Home</title>
+    <style>
+        :root {
+            --primary-color: #007bff; /* Blue */
+            --primary-hover: #0056b3;
+            --background-color: #f4f7f6; /* Light Gray */
+            --card-background: #ffffff;
+            --text-color: #333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px; /* Mobile width constraint */
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .hero p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        /* Product Grid */
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 10px;
+        }
+        .product-card {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 10px;
+            padding: 15px;
+            width: calc(50% - 20px); /* Two cards per row for mobile */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .product-image {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .product-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .product-description {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 10px;
+            height: 30px; /* fixed height for alignment */
+        }
+        .product-price {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .book-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .book-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Responsive adjustments for very small screens */
+        @media (max-width: 380px) {
+            .product-card {
+                width: 90%; /* One card per row */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>MobileMart</h1>
+            <p>Your Next Mobile, Just a Click Away</p>
+        </header>
+
+        <section class="product-grid">
+            <div class="product-card" data-id="1" data-name="Aura X" data-price="799" data-desc="The future in your hand." data-img="https://picsum.photos/id/11/300/400">
+                <img src="https://picsum.photos/id/11/300/400" alt="Aura X" class="product-image">
+                <div class="product-name">Aura X</div>
+                <div class="product-description">The future in your hand.</div>
+                <div class="product-price">$799</div>
+                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
+            </div>
+            <div class="product-card" data-id="2" data-name="Swift 10" data-price="549" data-desc="Speed and sleek design." data-img="https://picsum.photos/id/22/300/400">
+                <img src="https://picsum.photos/id/22/300/400" alt="Swift 10" class="product-image">
+                <div class="product-name">Swift 10</div>
+                <div class="product-description">Speed and sleek design.</div>
+                <div class="product-price">$549</div>
+                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
+            </div>
+            <div class="product-card" data-id="3" data-name="Nova Pro" data-price="999" data-desc="Ultimate camera experience." data-img="https://picsum.photos/id/33/300/400">
+                <img src="https://picsum.photos/id/33/300/400" alt="Nova Pro" class="product-image">
+                <div class="product-name">Nova Pro</div>
+                <div class="product-description">Ultimate camera experience.</div>
+                <div class="product-price">$999</div>
+                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
+            </div>
+            <div class="product-card" data-id="4" data-name="Zenith Lite" data-price="399" data-desc="Budget-friendly brilliance." data-img="https://picsum.photos/id/44/300/400">
+                <img src="https://picsum.photos/id/44/300/400" alt="Zenith Lite" class="product-image">
+                <div class="product-name">Zenith Lite</div>
+                <div class="product-description">Budget-friendly brilliance.</div>
+                <div class="product-price">$399</div>
+                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
+            </div>
+            <div class="product-card" data-id="5" data-name="Penta 5G" data-price="699" data-desc="Next-gen connectivity." data-img="https://picsum.photos/id/55/300/400">
+                <img src="https://picsum.photos/id/55/300/400" alt="Penta 5G" class="product-image">
+                <div class="product-name">Penta 5G</div>
+                <div class="product-description">Next-gen connectivity.</div>
+                <div class="product-price">$699</div>
+                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
+            </div>
+            <div class="product-card" data-id="6" data-name="Evolve Z" data-price="899" data-desc="Innovative foldable display." data-img="https://picsum.photos/id/66/300/400">
+                <img src="https://picsum.photos/id/66/300/400" alt="Evolve Z" class="product-image">
+                <div class="product-name">Evolve Z</div>
+                <div class="product-description">Innovative foldable display.</div>
+                <div class="product-price">$899</div>
+                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function bookMobile(button) {
+            const card = button.closest('.product-card');
+            const mobile = {
+                id: card.dataset.id,
+                name: card.dataset.name,
+                price: card.dataset.price,
+                description: card.dataset.desc,
+                image: card.dataset.img
+            };
+
+            // Save selected mobile to localStorage
+            localStorage.setItem('selectedMobile', JSON.stringify(mobile));
+
+            // Redirect to the form page
+            window.location.href = 'form.html';
+        }
+    </script>
+</body>
+</html>
