@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileMart | Checkout</title>
+    <style>
+        :root {
+            --primary-color: #007bff; /* Blue */
+            --primary-hover: #0056b3;
+            --background-color: #f4f7f6; /* Light Gray */
+            --card-background: #ffffff;
+            --text-color: #333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+        /* Cart Summary */
+        .cart-summary {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #e9f5ff; /* Light primary background */
+        }
+        .cart-summary h3 {
+            margin-top: 0;
+            color: #0056b3;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .mobile-details {
+            display: flex;
+            align-items: center;
+        }
+        .mobile-details img {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .mobile-info {
+            flex-grow: 1;
+        }
+        .mobile-info .name {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        .mobile-info .price {
+            color: #d9534f; /* Red for price */
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .proceed-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .proceed-btn:hover {
+            background-color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Booking Details</h2>
+
+        <section class="cart-summary" id="cartSummary">
+            <h3>Selected Mobile</h3>
+            <p id="noMobileMsg" style="text-align: center; color: #d9534f; display: none;">No mobile selected. Please go back to <a href="index.html">Home</a>.</p>
+        </section>
+
+        <form id="checkoutForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="john.doe@example.com" required>
+            </div>
+            <button type="submit" class="proceed-btn">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileData = localStorage.getItem('selectedMobile');
+            const cartSummary = document.getElementById('cartSummary');
+            const noMobileMsg = document.getElementById('noMobileMsg');
+            const checkoutForm = document.getElementById('checkoutForm');
+            
+            if (mobileData) {
+                const mobile = JSON.parse(mobileData);
+                const html = `
+                    <div class="mobile-details">
+                        <img src="${mobile.image}" alt="${mobile.name}">
+                        <div class="mobile-info">
+                            <div class="name">${mobile.name}</div>
+                            <div class="desc">${mobile.description}</div>
+                            <div class="price">Price: $${mobile.price}</div>
+                        </div>
+                    </div>
+                `;
+                // Append the mobile details just after the H3
+                cartSummary.innerHTML = '<h3>Selected Mobile</h3>' + html;
+            } else {
+                // If no mobile is selected, show error and hide form
+                noMobileMsg.style.display = 'block';
+                checkoutForm.style.display = 'none';
+                cartSummary.innerHTML = '<h3>Selected Mobile</h3>' + noMobileMsg.outerHTML;
+            }
+
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Basic validation (fields are already 'required' in HTML)
+                const fullName = document.getElementById('fullName').value;
+                const email = document.getElementById('email').value;
+
+                if (fullName && email) {
+                    // Save user details temporarily
+                    localStorage.setItem('customerDetails', JSON.stringify({ fullName, email }));
+                    window.location.href = 'payment.html';
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
