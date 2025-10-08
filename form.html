@@ -1,188 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobileMart | Checkout</title>
-    <style>
-        :root {
-            --primary-color: #007bff; /* Blue */
-            --primary-hover: #0056b3;
-            --background-color: #f4f7f6; /* Light Gray */
-            --card-background: #ffffff;
-            --text-color: #333;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-        }
-        h2 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-        }
-        /* Cart Summary */
-        .cart-summary {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background-color: #e9f5ff; /* Light primary background */
-        }
-        .cart-summary h3 {
-            margin-top: 0;
-            color: #0056b3;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-        .mobile-details {
-            display: flex;
-            align-items: center;
-        }
-        .mobile-details img {
-            width: 80px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-right: 15px;
-        }
-        .mobile-info {
-            flex-grow: 1;
-        }
-        .mobile-info .name {
-            font-weight: 600;
-            font-size: 1.1em;
-        }
-        .mobile-info .price {
-            color: #d9534f; /* Red for price */
-            font-weight: 700;
-            font-size: 1.2em;
-            margin-top: 5px;
-        }
-        /* Form Styling */
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus, input[type="email"]:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-        .proceed-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            margin-top: 15px;
-        }
-        .proceed-btn:hover {
-            background-color: var(--primary-hover);
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Checkout — PixelMobile</title>
+<style>
+  :root{
+    --bg:#081223;--card:#071220;--accent:#06b6d4;--muted:#9fb4c7;--radius:14px;
+    font-family: Inter, system-ui, -apple-system, Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:18px;background:linear-gradient(180deg,#031225,#071a2b);color:#e7f3fb;
+    min-height:100vh;display:flex;justify-content:center;
+  }
+  .wrap{width:100%;max-width:420px}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021124}
+  h1{margin:0;font-size:18px}
+  p.lead{margin:6px 0 12px;color:var(--muted);font-size:13px}
+
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+  .product{
+    display:flex;gap:12px;align-items:center;margin-bottom:12px;
+  }
+  .product img{width:84px;height:84px;border-radius:8px;object-fit:cover}
+  .pmeta{flex:1}
+  .pmeta h3{margin:0;font-size:15px}
+  .pmeta p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+  form{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+  label{font-size:13px;color:var(--muted)}
+  input[type="text"], input[type="email"]{
+    padding:10px;border-radius:10px;border:0;background:rgba(255,255,255,0.03);color:inherit;
+    outline: none;box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+  .btn{
+    border:0;padding:12px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),#7c3aed);color:#021124;cursor:pointer;margin-top:6px;
+  }
+  .btn:active{transform:scale(.997)}
+  .small{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+
+  .back{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px;border-radius:10px;cursor:pointer}
+
+  @media(min-width:600px){
+    body{padding:28px}
+    .wrap{box-shadow:0 20px 60px rgba(2,6,23,0.75);border-radius:18px;padding:18px}
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>Your Booking Details</h2>
+<div class="wrap" role="main">
+  <header>
+    <div class="logo">PM</div>
+    <div>
+      <h1>Checkout</h1>
+      <p class="lead">Fill your details to reserve the mobile</p>
+    </div>
+  </header>
 
-        <section class="cart-summary" id="cartSummary">
-            <h3>Selected Mobile</h3>
-            <p id="noMobileMsg" style="text-align: center; color: #d9534f; display: none;">No mobile selected. Please go back to <a href="index.html">Home</a>.</p>
-        </section>
-
-        <form id="checkoutForm">
-            <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" placeholder="John Doe" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="john.doe@example.com" required>
-            </div>
-            <button type="submit" class="proceed-btn">Proceed to Payment</button>
-        </form>
+  <div class="card" id="cartCard">
+    <div id="placeholder" style="display:none">No mobile selected — please go back to shop.</div>
+    <div class="product" id="productBlock" style="display:none">
+      <img id="pimg" src="" alt="Selected mobile">
+      <div class="pmeta">
+        <h3 id="pname"></h3>
+        <p id="pdesc"></p>
+        <strong id="pprice" style="display:block;margin-top:8px;color:var(--accent)"></strong>
+      </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileData = localStorage.getItem('selectedMobile');
-            const cartSummary = document.getElementById('cartSummary');
-            const noMobileMsg = document.getElementById('noMobileMsg');
-            const checkoutForm = document.getElementById('checkoutForm');
-            
-            if (mobileData) {
-                const mobile = JSON.parse(mobileData);
-                const html = `
-                    <div class="mobile-details">
-                        <img src="${mobile.image}" alt="${mobile.name}">
-                        <div class="mobile-info">
-                            <div class="name">${mobile.name}</div>
-                            <div class="desc">${mobile.description}</div>
-                            <div class="price">Price: $${mobile.price}</div>
-                        </div>
-                    </div>
-                `;
-                // Append the mobile details just after the H3
-                cartSummary.innerHTML = '<h3>Selected Mobile</h3>' + html;
-            } else {
-                // If no mobile is selected, show error and hide form
-                noMobileMsg.style.display = 'block';
-                checkoutForm.style.display = 'none';
-                cartSummary.innerHTML = '<h3>Selected Mobile</h3>' + noMobileMsg.outerHTML;
-            }
+    <form id="checkoutForm" style="display:none" onsubmit="event.preventDefault(); proceed()">
+      <div>
+        <label for="fullname">Full Name</label>
+        <input id="fullname" type="text" required placeholder="Your full name">
+      </div>
+      <div>
+        <label for="email">Email address</label>
+        <input id="email" type="email" required placeholder="you@example.com">
+      </div>
 
-            checkoutForm.addEventListener('submit', (e) => {
-                e.preventDefault();
+      <button class="btn" type="submit">Proceed to Payment</button>
+      <button type="button" class="back" onclick="goBack()" style="width:100%;margin-top:8px">Back to shop</button>
+    </form>
 
-                // Basic validation (fields are already 'required' in HTML)
-                const fullName = document.getElementById('fullName').value;
-                const email = document.getElementById('email').value;
+    <p class="small">We will only use your email to send the booking confirmation. This is a demo checkout.</p>
+  </div>
+</div>
 
-                if (fullName && email) {
-                    // Save user details temporarily
-                    localStorage.setItem('customerDetails', JSON.stringify({ fullName, email }));
-                    window.location.href = 'payment.html';
-                } else {
-                    alert('Please fill in all required fields.');
-                }
-            });
-        });
-    </script>
+<script>
+  // load selected mobile
+  const productBlock = document.getElementById('productBlock');
+  const placeholder = document.getElementById('placeholder');
+  const formEl = document.getElementById('checkoutForm');
+
+  function loadSelected(){
+    const raw = localStorage.getItem('selectedMobile');
+    if(!raw){
+      placeholder.style.display='block';
+      productBlock.style.display='none';
+      formEl.style.display='none';
+      return;
+    }
+    const p = JSON.parse(raw);
+    productBlock.style.display = 'flex';
+    formEl.style.display = 'flex';
+    placeholder.style.display = 'none';
+    document.getElementById('pimg').src = p.img;
+    document.getElementById('pname').textContent = p.name;
+    document.getElementById('pdesc').textContent = p.desc;
+    document.getElementById('pprice').textContent = '₹' + p.price.toLocaleString('en-IN');
+
+    // if user had partially filled form previously, autofill
+    const storedForm = localStorage.getItem('checkoutForm');
+    if(storedForm){
+      try{
+        const f = JSON.parse(storedForm);
+        if(f.name) document.getElementById('fullname').value = f.name;
+        if(f.email) document.getElementById('email').value = f.email;
+      }catch(e){}
+    }
+  }
+
+  function proceed(){
+    // save form to localStorage and go to payment
+    const name = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if(!name || !email){ alert('Please complete your details.'); return; }
+    const payload = {name,email,ts:Date.now()};
+    localStorage.setItem('checkoutForm', JSON.stringify(payload));
+    location.href = 'payment.html';
+  }
+
+  function goBack(){ location.href = 'index.html'; }
+
+  // initialize
+  loadSelected();
+</script>
 </body>
 </html>
