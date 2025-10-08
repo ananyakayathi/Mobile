@@ -1,197 +1,218 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobileMart | Home</title>
-    <style>
-        :root {
-            --primary-color: #007bff; /* Blue */
-            --primary-hover: #0056b3;
-            --background-color: #f4f7f6; /* Light Gray */
-            --card-background: #ffffff;
-            --text-color: #333;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px; /* Mobile width constraint */
-            background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-        }
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            color: #fff;
-            text-align: center;
-            padding: 60px 20px;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-        .hero p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-        /* Product Grid */
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 10px;
-        }
-        .product-card {
-            background-color: var(--card-background);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin: 10px;
-            padding: 15px;
-            width: calc(50% - 20px); /* Two cards per row for mobile */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        .product-image {
-            width: 80%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .product-name {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .product-description {
-            font-size: 0.85em;
-            color: #666;
-            margin-bottom: 10px;
-            height: 30px; /* fixed height for alignment */
-        }
-        .product-price {
-            font-size: 1.2em;
-            color: var(--primary-color);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .book-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-            width: 100%;
-        }
-        .book-btn:hover {
-            background-color: var(--primary-hover);
-        }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PixelMobile — Modern Mini Store</title>
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --accent:#06b6d4;
+    --muted:#94a3b8;
+    --glass: rgba(255,255,255,0.04);
+    --radius:14px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background: linear-gradient(180deg,#071026 0%, #07162a 60%);
+    color:#e6eef6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:18px;
+    display:flex;
+    justify-content:center;
+  }
+  .app{
+    width:100%;
+    max-width:420px;
+  }
 
-        /* Responsive adjustments for very small screens */
-        @media (max-width: 380px) {
-            .product-card {
-                width: 90%; /* One card per row */
-            }
-        }
-    </style>
+  header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .logo{
+    width:54px;height:54px;border-radius:12px;
+    background:linear-gradient(135deg,var(--accent) 0%, #7c3aed 100%);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#021124;
+    box-shadow: 0 6px 18px rgba(6,182,212,0.12);
+  }
+  h1{margin:0;font-size:18px}
+  p.tag{margin:0;color:var(--muted);font-size:13px}
+
+  .hero{
+    margin:10px 0 18px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:var(--radius);
+    padding:16px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  }
+  .hero-left{
+    flex:1;
+  }
+  .hero h2{margin:0 0 6px;font-size:16px}
+  .hero p {margin:0;color:var(--muted);font-size:13px}
+
+  .hero-image{
+    width:84px;height:84px;border-radius:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .hero-image img{width:100%;height:100%;object-fit:cover}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:12px;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    transition:transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 6px 12px rgba(2,6,23,0.6);
+  }
+  .card:hover{ transform: translateY(-6px); box-shadow: 0 18px 30px rgba(2,6,23,0.6); }
+
+  .thumb{
+    height:120px;border-radius:10px;overflow:hidden;display:block;background:var(--glass);
+  }
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .title{font-weight:600;font-size:14px}
+  .price{font-weight:700;color:var(--accent);font-size:14px}
+
+  .desc{font-size:12px;color:var(--muted);min-height:36px}
+
+  .actions{display:flex;gap:8px;align-items:center;justify-content:space-between}
+  .btn{
+    flex:1;
+    border:0;padding:8px 10px;border-radius:10px;font-weight:600;
+    background:linear-gradient(90deg,var(--accent),#7c3aed);
+    color:#021124;cursor:pointer;transition:transform .12s ease;
+    box-shadow:0 8px 20px rgba(7,17,27,0.45);
+  }
+  .btn.secondary{
+    background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.03);box-shadow:none;font-weight:600;
+  }
+  .btn:active{transform:scale(.99)}
+  footer{margin-top:18px;color:var(--muted);text-align:center;font-size:13px}
+
+  @media(min-width:600px){
+    body{padding:28px}
+    .app{box-shadow:0 20px 60px rgba(2,6,23,0.75);border-radius:18px;padding:18px;background:transparent}
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header class="hero">
-            <h1>MobileMart</h1>
-            <p>Your Next Mobile, Just a Click Away</p>
-        </header>
+<div class="app" role="main">
+  <header>
+    <div class="logo">PM</div>
+    <div>
+      <h1>PixelMobile</h1>
+      <p class="tag">Modern phones — fast delivery</p>
+    </div>
+  </header>
 
-        <section class="product-grid">
-            <div class="product-card" data-id="1" data-name="Aura X" data-price="799" data-desc="The future in your hand." data-img="https://picsum.photos/id/11/300/400">
-                <img src="https://picsum.photos/id/11/300/400" alt="Aura X" class="product-image">
-                <div class="product-name">Aura X</div>
-                <div class="product-description">The future in your hand.</div>
-                <div class="product-price">$799</div>
-                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
-            </div>
-            <div class="product-card" data-id="2" data-name="Swift 10" data-price="549" data-desc="Speed and sleek design." data-img="https://picsum.photos/id/22/300/400">
-                <img src="https://picsum.photos/id/22/300/400" alt="Swift 10" class="product-image">
-                <div class="product-name">Swift 10</div>
-                <div class="product-description">Speed and sleek design.</div>
-                <div class="product-price">$549</div>
-                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
-            </div>
-            <div class="product-card" data-id="3" data-name="Nova Pro" data-price="999" data-desc="Ultimate camera experience." data-img="https://picsum.photos/id/33/300/400">
-                <img src="https://picsum.photos/id/33/300/400" alt="Nova Pro" class="product-image">
-                <div class="product-name">Nova Pro</div>
-                <div class="product-description">Ultimate camera experience.</div>
-                <div class="product-price">$999</div>
-                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
-            </div>
-            <div class="product-card" data-id="4" data-name="Zenith Lite" data-price="399" data-desc="Budget-friendly brilliance." data-img="https://picsum.photos/id/44/300/400">
-                <img src="https://picsum.photos/id/44/300/400" alt="Zenith Lite" class="product-image">
-                <div class="product-name">Zenith Lite</div>
-                <div class="product-description">Budget-friendly brilliance.</div>
-                <div class="product-price">$399</div>
-                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
-            </div>
-            <div class="product-card" data-id="5" data-name="Penta 5G" data-price="699" data-desc="Next-gen connectivity." data-img="https://picsum.photos/id/55/300/400">
-                <img src="https://picsum.photos/id/55/300/400" alt="Penta 5G" class="product-image">
-                <div class="product-name">Penta 5G</div>
-                <div class="product-description">Next-gen connectivity.</div>
-                <div class="product-price">$699</div>
-                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
-            </div>
-            <div class="product-card" data-id="6" data-name="Evolve Z" data-price="899" data-desc="Innovative foldable display." data-img="https://picsum.photos/id/66/300/400">
-                <img src="https://picsum.photos/id/66/300/400" alt="Evolve Z" class="product-image">
-                <div class="product-name">Evolve Z</div>
-                <div class="product-description">Innovative foldable display.</div>
-                <div class="product-price">$899</div>
-                <button class="book-btn" onclick="bookMobile(this)">Book Now</button>
-            </div>
-        </section>
+  <section class="hero" aria-label="Hero">
+    <div class="hero-left">
+      <h2>Shop the latest mobiles</h2>
+      <p>Curated selection of top-performing phones — choose, book, and pay in a few taps.</p>
+    </div>
+    <div class="hero-image" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f9f9b4fd0d0f1d5f6b1b77d9b2b6c1b" alt="hero phone"/>
+    </div>
+  </section>
+
+  <section>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <strong>Popular phones</strong>
+      <small style="color:var(--muted);">Tap to view details</small>
     </div>
 
-    <script>
-        function bookMobile(button) {
-            const card = button.closest('.product-card');
-            const mobile = {
-                id: card.dataset.id,
-                name: card.dataset.name,
-                price: card.dataset.price,
-                description: card.dataset.desc,
-                image: card.dataset.img
-            };
+    <div class="grid" id="catalog">
+      <!-- Cards injected by JS for clarity -->
+    </div>
+  </section>
 
-            // Save selected mobile to localStorage
-            localStorage.setItem('selectedMobile', JSON.stringify(mobile));
+  <footer>
+    © <span id="year"></span> PixelMobile — crafted for mobile shopping
+  </footer>
+</div>
 
-            // Redirect to the form page
-            window.location.href = 'form.html';
-        }
-    </script>
+<script>
+  // sample product list
+  const products = [
+    {id:'p1', name:'Aurora X1', desc:'Sleek design • 6.5" AMOLED • 128GB', price:19999, img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1c2f1b2a0a3ea2a7657f8b0de6b2b0b8'},
+    {id:'p2', name:'Nova Prime', desc:'Power camera • 8GB RAM • 256GB', price:24999, img:'https://images.unsplash.com/photo-1525975443605-1b930f2f9f38?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc9f2ef6f7aa1b4543a2d7abe3f0d1e'},
+    {id:'p3', name:'Zenfone Lite', desc:'Compact• 5.8" • Long battery', price:14999, img:'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b1b9d6a1b9d2fabc33c7f52d7b6d11f'},
+    {id:'p4', name:'Orbit S', desc:'Flagship chipset • 120Hz • 512GB', price:49999, img:'https://images.unsplash.com/photo-1510552776732-01d2a0f5b4b2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=4a5c2d3f6bf6b3b1a2f5b6d7c8e9a1b2'},
+    {id:'p5', name:'Lumen Go', desc:'Great value • 50MP camera', price:16999, img:'https://images.unsplash.com/photo-1526178612456-6e659a0ef6d9?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=b7a2c987f0f1a2c345d6a3b29c1e2f1b'},
+    {id:'p6', name:'Titan Ultra', desc:'Huge battery • Fast charge', price:27999, img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=c5a7c1c9cd55b3a2a0d1b6c8b2f7e9a0'}
+  ];
+
+  const catalog = document.getElementById('catalog');
+
+  function createCard(p){
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <a class="thumb" href="javascript:void(0)" aria-hidden="true">
+        <img src="${p.img}" alt="${p.name}">
+      </a>
+      <div style="flex:1">
+        <div class="meta">
+          <div class="title">${p.name}</div>
+          <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+        </div>
+        <div class="desc">${p.desc}</div>
+      </div>
+      <div class="actions">
+        <button class="btn" data-id="${p.id}" onclick="bookNow('${p.id}')">Book Now</button>
+        <button class="btn secondary" onclick="viewDetails('${p.id}')">Details</button>
+      </div>
+    `;
+    return el;
+  }
+
+  function render(){
+    products.forEach(p => catalog.appendChild(createCard(p)));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  }
+
+  function bookNow(id){
+    // save chosen product to localStorage and redirect
+    const product = products.find(x=>x.id===id);
+    if(!product) return alert('Product not found');
+    localStorage.setItem('selectedMobile', JSON.stringify(product));
+    // optionally clear previous form info
+    localStorage.removeItem('checkoutForm');
+    location.href = 'form.html';
+  }
+
+  function viewDetails(id){
+    const product = products.find(x=>x.id===id);
+    if(!product) return;
+    alert(product.name + '\\n' + product.desc + '\\nPrice: ₹' + product.price.toLocaleString('en-IN'));
+  }
+
+  // initial render
+  render();
+</script>
 </body>
 </html>
