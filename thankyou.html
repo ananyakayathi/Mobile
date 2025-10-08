@@ -1,80 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobileMart | Thank You</title>
-    <style>
-        :root {
-            --primary-color: #28a745; /* Green for success */
-            --primary-hover: #1e7e34;
-            --background-color: #f4f7f6; /* Light Gray */
-            --text-color: #333;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background-color: #ffffff;
-            padding: 40px 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        .icon {
-            font-size: 4em;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-        h2 {
-            font-size: 2.2em;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        p {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 30px;
-        }
-        .home-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            text-decoration: none; /* For the link */
-            transition: background-color 0.3s ease;
-            display: inline-block;
-        }
-        .home-btn:hover {
-            background-color: var(--primary-hover);
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Thank you — PixelMobile</title>
+<style>
+  :root{--bg:#071022;--accent:#06b6d4;--muted:#9fb4c7}
+  body{margin:0;padding:18px;background:linear-gradient(180deg,#021426,#071a2b);color:#eaf6fb;font-family:Inter,system-ui,Roboto,Arial;display:flex;justify-content:center;align-items:center;min-height:100vh}
+  .wrap{max-width:420px;width:100%}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:22px;border-radius:16px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+  h1{margin:0;font-size:22px}
+  p{color:var(--muted);font-size:15px}
+  .order{margin-top:14px;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;text-align:left}
+  .btn{
+    margin-top:16px;padding:12px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--accent),#7c3aed);color:#021124;font-weight:700;cursor:pointer;width:100%;
+  }
+  .muted{margin-top:10px;color:var(--muted)}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="icon">🎉</div>
-        <h2>Thank you for your purchase!</h2>
-        <p>Your mobile has been booked successfully. We will send a confirmation email shortly.</p>
-        <a href="index.html" class="home-btn">Go Back to Home</a>
+  <div class="wrap">
+    <div class="card">
+      <div style="font-size:36px">🎉</div>
+      <h1>Thank you for your purchase!</h1>
+      <p>Your mobile has been booked successfully.</p>
+
+      <div class="order" id="orderBlock" style="display:none">
+        <strong id="orderId"></strong>
+        <div id="orderDetails" style="margin-top:8px;color:var(--muted)"></div>
+      </div>
+
+      <button class="btn" id="homeBtn">Back to Home</button>
+      <div class="muted" id="mutedText">A confirmation was sent to your email (demo).</div>
     </div>
+  </div>
+
+<script>
+  function loadOrder(){
+    const last = localStorage.getItem('lastOrder');
+    const checkout = localStorage.getItem('checkoutForm');
+    if(last){
+      try{
+        const o = JSON.parse(last);
+        document.getElementById('orderBlock').style.display = 'block';
+        document.getElementById('orderId').textContent = 'Order ID: ' + o.id;
+        document.getElementById('orderDetails').innerHTML = `
+          Item: ${o.product.name} <br>
+          Price: ₹${o.product.price.toLocaleString('en-IN')} <br>
+          Buyer: ${o.buyer.name} • ${o.buyer.email}
+        `;
+      }catch(e){}
+      // remove stored order after showing
+      setTimeout(()=> localStorage.removeItem('lastOrder'), 3000);
+    } else if(checkout){
+      // if lastOrder missing but checkout exists (edge case)
+      const b = JSON.parse(checkout);
+      document.getElementById('orderBlock').style.display = 'block';
+      document.getElementById('orderId').textContent = 'Reservation completed';
+      document.getElementById('orderDetails').innerHTML = `Buyer: ${b.name} • ${b.email}`;
+    }
+  }
+
+  document.getElementById('homeBtn').addEventListener('click', ()=>{
+    // clear checkout data to simulate completion
+    localStorage.removeItem('checkoutForm');
+    location.href = 'index.html';
+  });
+
+  loadOrder();
+</script>
 </body>
 </html>
