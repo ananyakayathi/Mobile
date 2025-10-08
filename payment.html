@@ -1,149 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobileMart | Payment</title>
-    <style>
-        :root {
-            --primary-color: #007bff; /* Blue */
-            --primary-hover: #0056b3;
-            --background-color: #f4f7f6; /* Light Gray */
-            --text-color: #333;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            --danger-color: #d9534f;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-        }
-        h2 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-        }
-        /* Payment Form Styling */
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-        .row {
-            display: flex;
-            gap: 15px;
-        }
-        .row > .form-group {
-            flex: 1;
-        }
-        .info-box {
-            background-color: #ffebee;
-            color: var(--danger-color);
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 0.9em;
-        }
-        .pay-btn {
-            background-color: var(--danger-color);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .pay-btn:hover {
-            background-color: #c9302c;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Payment — PixelMobile</title>
+<style>
+  :root{--bg:#061322;--accent:#06b6d4;--muted:#9fb4c7;--radius:12px}
+  body{margin:0;padding:18px;background:linear-gradient(180deg,#021425,#071a2b);color:#eaf6fb;font-family:Inter,system-ui,Roboto,Arial;}
+  .wrap{max-width:420px;width:100%;margin:0 auto}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021124}
+  h1{margin:0;font-size:18px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+  .summary{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .summary img{width:68px;height:68px;border-radius:8px;object-fit:cover}
+  .summary .meta{flex:1}
+  .meta h4{margin:0;font-size:15px}
+  .meta p{margin:6px 0 0;color:var(--muted);font-size:13px}
+  form{display:flex;flex-direction:column;gap:8px}
+  input{padding:10px;border-radius:10px;border:0;background:rgba(255,255,255,0.03);color:inherit}
+  .row{display:flex;gap:8px}
+  .row input{flex:1}
+  .btn{border:0;padding:12px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),#7c3aed);color:#021124;cursor:pointer;margin-top:6px}
+  .muted{color:var(--muted);font-size:13px;text-align:center;margin-top:10px}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>Secure Payment</h2>
+<div class="wrap">
+  <header>
+    <div class="logo">PM</div>
+    <div>
+      <h1>Payment</h1>
+      <p style="margin:0;color:var(--muted);font-size:13px">Secure checkout (demo)</p>
+    </div>
+  </header>
 
-        <div class="info-box">
-            This is a dummy payment form for demonstration purposes. No real transaction will occur.
-        </div>
-
-        <form id="paymentForm">
-            <div class="form-group">
-                <label for="cardNumber">Card Number</label>
-                <input type="text" id="cardNumber" placeholder="4000 1234 5678 9010" required maxlength="16" pattern="\d{16}" title="16-digit card number">
-            </div>
-
-            <div class="row">
-                <div class="form-group">
-                    <label for="expiryDate">Expiry Date</label>
-                    <input type="text" id="expiryDate" placeholder="MM/YY" required maxlength="5" pattern="(0[1-9]|1[0-2])\/\d{2}" title="MM/YY format">
-                </div>
-                <div class="form-group">
-                    <label for="cvv">CVV</label>
-                    <input type="text" id="cvv" placeholder="123" required maxlength="3" pattern="\d{3}" title="3-digit CVV">
-                </div>
-            </div>
-
-            <button type="submit" class="pay-btn">Proceed to Pay</button>
-        </form>
+  <div class="card" id="payCard">
+    <div id="productSummary" class="summary" style="display:none">
+      <img id="pimg" src="" alt="product">
+      <div class="meta">
+        <h4 id="pname"></h4>
+        <p id="pprice" style="color:var(--accent)"></p>
+      </div>
     </div>
 
-    <script>
-        document.getElementById('paymentForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Note: The HTML patterns provide basic validation
-            const cardNumber = document.getElementById('cardNumber').value;
-            const expiryDate = document.getElementById('expiryDate').value;
-            const cvv = document.getElementById('cvv').value;
+    <form id="paymentForm" onsubmit="event.preventDefault(); payNow()">
+      <label>Card number</label>
+      <input id="card" type="text" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required>
 
-            if (cardNumber && expiryDate && cvv) {
-                // Clear selected mobile and customer details after "successful" payment
-                localStorage.removeItem('selectedMobile');
-                localStorage.removeItem('customerDetails');
+      <div class="row">
+        <div style="flex:1">
+          <label>Expiry</label>
+          <input id="expiry" type="text" placeholder="MM/YY" maxlength="5" required>
+        </div>
+        <div style="width:110px">
+          <label>CVV</label>
+          <input id="cvv" type="password" maxlength="4" placeholder="123" required>
+        </div>
+      </div>
 
-                // Redirect to the thank you page
-                window.location.href = 'thankyou.html';
-            } else {
-                alert('Please ensure all payment details are correctly filled.');
-            }
-        });
-    </script>
+      <button class="btn" type="submit">Proceed to Pay</button>
+      <div class="muted">This is a demo form — no real transaction will occur.</div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // load product + buyer summary
+  function load(){
+    const raw = localStorage.getItem('selectedMobile');
+    const form = localStorage.getItem('checkoutForm');
+    if(!raw || !form){
+      alert('Missing product or form details. Redirecting to shop.');
+      location.href = 'index.html';
+      return;
+    }
+    const p = JSON.parse(raw);
+    document.getElementById('pimg').src = p.img;
+    document.getElementById('pname').textContent = p.name;
+    document.getElementById('pprice').textContent = '₹' + p.price.toLocaleString('en-IN');
+    document.getElementById('productSummary').style.display = 'flex';
+  }
+
+  function sanitizeCard(v){
+    return v.replace(/\D/g,'').slice(0,16).replace(/(.{4})/g,'$1 ').trim();
+  }
+
+  // small formatter for card input
+  const cardEl = document.getElementById('card');
+  const expiryEl = document.getElementById('expiry');
+  document.addEventListener('input', e=>{
+    if(e.target===cardEl){
+      const pos = cardEl.selectionStart;
+      const cleaned = sanitizeCard(cardEl.value);
+      cardEl.value = cleaned;
+    }
+    if(e.target===expiryEl){
+      let v = expiryEl.value.replace(/[^\d]/g,'').slice(0,4);
+      if(v.length>2) v = v.slice(0,2) + '/' + v.slice(2);
+      expiryEl.value = v;
+    }
+  });
+
+  function payNow(){
+    const card = cardEl.value.replace(/\s/g,'');
+    const expiry = expiryEl.value;
+    const cvv = document.getElementById('cvv').value;
+    if(card.length < 12 || cvv.length < 3){
+      alert('Please enter valid card details (demo validation).');
+      return;
+    }
+    // store order summary
+    const order = {
+      id: 'order_' + Date.now().toString(36),
+      product: JSON.parse(localStorage.getItem('selectedMobile')),
+      buyer: JSON.parse(localStorage.getItem('checkoutForm')),
+      paidAt: new Date().toISOString()
+    };
+    localStorage.setItem('lastOrder', JSON.stringify(order));
+    // Clear sensitive-ish fields from storage (we never store card details)
+    localStorage.removeItem('selectedMobile');
+    // keep checkoutForm so thankyou can show buyer name
+    setTimeout(()=> location.href = 'thankyou.html', 700);
+  }
+
+  // init
+  load();
+</script>
 </body>
 </html>
