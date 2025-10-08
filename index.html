@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MobileStore - Home</title>
+<title>MobileHub - Home</title>
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
   }
   body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg, #0a192f, #112240);
     color: #fff;
     min-height: 100vh;
+    overflow-x: hidden;
   }
   header {
     text-align: center;
@@ -22,24 +23,24 @@
   }
   header h1 {
     font-size: 2rem;
-    color: #fff;
+    color: #64ffda;
+    margin-bottom: 0.5rem;
   }
   header p {
-    color: #b0bec5;
+    color: #a8b2d1;
   }
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.2rem;
+  .mobiles {
     padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.2rem;
   }
   .card {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,0.08);
     border-radius: 16px;
     padding: 1rem;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
   }
   .card:hover {
     transform: translateY(-5px);
@@ -47,53 +48,65 @@
   .card img {
     width: 100%;
     height: 150px;
-    border-radius: 10px;
     object-fit: cover;
+    border-radius: 12px;
   }
   .card h3 {
-    margin-top: 0.8rem;
     font-size: 1rem;
+    margin-top: 0.6rem;
   }
   .card p {
+    color: #a8b2d1;
     font-size: 0.8rem;
-    color: #b0bec5;
+    margin-top: 0.3rem;
   }
   .price {
-    color: #4caf50;
-    font-weight: 600;
+    color: #64ffda;
+    font-weight: bold;
     margin: 0.5rem 0;
   }
   .buttons {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
+    margin-top: 0.5rem;
   }
   button {
-    padding: 8px 14px;
     border: none;
     border-radius: 8px;
-    font-size: 0.9rem;
+    padding: 8px 12px;
     cursor: pointer;
-    color: white;
+    font-weight: 500;
+    transition: 0.3s;
   }
   .book {
     background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+  }
+  .book:hover {
+    opacity: 0.9;
   }
   .details {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+  }
+  footer {
+    text-align: center;
+    color: #a8b2d1;
+    padding: 1rem;
+    font-size: 0.8rem;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>📱 MobileStore</h1>
-  <p>Find your perfect smartphone today!</p>
+  <h1>📱 MobileHub</h1>
+  <p>Your one-stop shop for the latest smartphones</p>
 </header>
 
-<div class="container">
+<section class="mobiles">
   <div class="card">
-    <img src="https://images.pexels.com/photos/6078126/pexels-photo-6078126.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Aurora X1">
+    <img src="https://images.unsplash.com/photo-1510552776732-01acc9a4c6b6?auto=format&fit=crop&w=800&q=80" alt="Aurora X1">
     <h3>Aurora X1</h3>
     <p>Sleek design • 6.5" AMOLED • 128GB</p>
     <div class="price">₹19,999</div>
@@ -104,7 +117,7 @@
   </div>
 
   <div class="card">
-    <img src="https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nova Prime">
+    <img src="https://images.unsplash.com/photo-1512499617640-c2f999018b72?auto=format&fit=crop&w=800&q=80" alt="Nova Prime">
     <h3>Nova Prime</h3>
     <p>Power camera • 8GB RAM • 256GB</p>
     <div class="price">₹24,999</div>
@@ -115,7 +128,7 @@
   </div>
 
   <div class="card">
-    <img src="https://images.pexels.com/photos/821754/pexels-photo-821754.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Zenfone Lite">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Zenfone Lite">
     <h3>Zenfone Lite</h3>
     <p>Compact • 5.8" • Long battery</p>
     <div class="price">₹14,999</div>
@@ -126,7 +139,7 @@
   </div>
 
   <div class="card">
-    <img src="https://images.pexels.com/photos/6078123/pexels-photo-6078123.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Orbit S">
+    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80" alt="Orbit S">
     <h3>Orbit S</h3>
     <p>Flagship chipset • 120Hz • 512GB</p>
     <div class="price">₹49,999</div>
@@ -137,7 +150,7 @@
   </div>
 
   <div class="card">
-    <img src="https://images.pexels.com/photos/6078129/pexels-photo-6078129.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lumen Go">
+    <img src="https://images.unsplash.com/photo-1585060544811-6b457b69f2a3?auto=format&fit=crop&w=800&q=80" alt="Lumen Go">
     <h3>Lumen Go</h3>
     <p>Stylish design • 6.1" • 128GB</p>
     <div class="price">₹22,999</div>
@@ -148,7 +161,7 @@
   </div>
 
   <div class="card">
-    <img src="https://images.pexels.com/photos/6078125/pexels-photo-6078125.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Titan Z">
+    <img src="https://images.unsplash.com/photo-1606813908897-5a5a5bde9bcd?auto=format&fit=crop&w=800&q=80" alt="Titan Z">
     <h3>Titan Z</h3>
     <p>Gaming beast • 12GB RAM • 512GB</p>
     <div class="price">₹54,999</div>
@@ -157,7 +170,11 @@
       <button class="details">Details</button>
     </div>
   </div>
-</div>
+</section>
+
+<footer>
+  &copy; 2025 MobileHub. All Rights Reserved.
+</footer>
 
 <script>
   function bookNow(mobileName) {
